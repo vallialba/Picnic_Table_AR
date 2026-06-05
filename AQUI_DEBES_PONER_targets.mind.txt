@@ -1,0 +1,1 @@
+Genera el archivo targets.mind con MindAR Compiler y colócalo en esta carpeta.
