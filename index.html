@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Mesa Picnic AR</title>
+
+  <script src="https://aframe.io/releases/1.5.0/aframe.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mind-ar@1.2.5/dist/mindar-image-aframe.prod.js"></script>
+
+  <style>
+    body {
+      margin: 0;
+      overflow: hidden;
+      font-family: Arial, sans-serif;
+    }
+
+    #info {
+      position: fixed;
+      z-index: 10;
+      top: 12px;
+      left: 12px;
+      right: 12px;
+      background: rgba(0, 0, 0, 0.65);
+      color: white;
+      padding: 12px 16px;
+      border-radius: 10px;
+      font-size: 14px;
+      line-height: 1.4;
+    }
+  </style>
+</head>
+
+<body>
+  <div id="info">
+    Apunta la cámara a la imagen marcador para ver la mesa en realidad aumentada.
+  </div>
+
+  <a-scene
+    mindar-image="imageTargetSrc: assets/targets.mind; maxTrack: 2; filterMinCF: 0.001; filterBeta: 1000;"
+    color-space="sRGB"
+    renderer="colorManagement: true; physicallyCorrectLights: true;"
+    vr-mode-ui="enabled: false"
+    device-orientation-permission-ui="enabled: true">
+    
+    <a-assets>
+      <a-asset-item id="modelo1" src="assets/mesa_bien_cesped_centro.glb"></a-asset-item>
+      <a-asset-item id="modelo2" src="assets/mesa_bien_sola_centro.glb"></a-asset-item>
+    </a-assets>
+
+    <a-camera position="0 0 0" look-controls="enabled: false"></a-camera>
+
+    <a-light type="ambient" intensity="2"></a-light>
+    <a-light type="directional" position="0 1 1" intensity="1"></a-light>
+
+    <a-entity mindar-image-target="targetIndex: 0">
+      <a-gltf-model
+        src="#modelo1"
+        position="-0.3 0.1 0"
+        rotation="90 0 0"
+        scale="0.04 0.04 0.04">
+      </a-gltf-model>
+    </a-entity>
+    
+    <a-entity mindar-image-target="targetIndex: 1">
+      <a-gltf-model
+        src="#modelo2"
+        position="0 0 0"
+        rotation="90 0 0"
+        scale="0.1 0.1 0.1">
+      </a-gltf-model>
+    </a-entity>
+    
+  </a-scene> 
+</body>
+</html>
